@@ -1,4 +1,8 @@
 'use strict';
+/////////////////////////////////////////////
+/**
+ * LECTURE: Constructor Functions in JavaScript
+ */
 
 const Person = function (firstName, birthYear) {
   //Instance properties
@@ -13,36 +17,38 @@ const Person = function (firstName, birthYear) {
 };
 const jonas = new Person('Jonas', 1991);
 console.log(jonas);
-// 1. New {} is created
-// 2. function is called, this = {}
-// 3. {} linked to prototype
-// 4. function automatically returns {}
+/**
+ * What happens here is
+ * 1. New {} is created
+   2. function is called, this = {}
+   3. {} linked to prototype
+   4. function automatically returns {}
+ */
 
+//Creating an instance of object
 const pyarel = new Person('Pyarel', 1998);
 console.log(pyarel);
 
 //Objects are instance of constructor fn
 console.log(pyarel instanceof Person);
 
-//Prototypes
+//Prototypes in JS
 Person.prototype.calcAge = function () {
   console.log(2037 - this.birthYear);
 };
 
 console.log(Person.prototype);
-
 console.log(pyarel.calcAge());
 
 //every object has a proto property
 console.log(pyarel.__proto__);
 
-//Check if pyarel is of the protope of Person
+//Check if pyarel object is of the protope of Person
 console.log(pyarel.__proto__ === Person.prototype);
 console.log(Person.prototype.isPrototypeOf(pyarel));
 
 // Step 3 : {} linked to prototype
 // It sets the proto property on object to the prototype of the constructor function
-
 Person.prototype.species = 'Homo Sapiens';
 console.log(pyarel.species);
 console.log(pyarel); // Property is not inside of pyarel object
@@ -52,7 +58,7 @@ console.log(pyarel); // Property is not inside of pyarel object
 console.log(pyarel.hasOwnProperty('firstName')); //true
 console.log(pyarel.hasOwnProperty('species')); // false
 
-//Prototypal Inheritance and the prototype chain
+// LECTURE: Prototypal Inheritance and the prototype chain
 /**
  * Constructor function has a property called Prototype which is an object.
  * Person.prototype also has a refernece back to the Person which is the constructor function
@@ -141,6 +147,7 @@ mercedes.brake();
 /**
  * LECTURE: ES6 CLASSES
  */
+
 //class expression
 const PersonCl1 = class {};
 
@@ -218,7 +225,7 @@ class PersonCl2 {
 
   set fullName(name) {
     if (name.includes(' ')) this._fullName = name;
-    // else alert(`${name} is not a full name`);
+    else alert(`${name} is not a full name`);
   }
 
   get fullName() {
@@ -249,7 +256,7 @@ Person.hey = function () {
   console.log(this); //refers to the constructor fn as that is calling the method
 };
 Person.hey();
-//but
+//but.....
 // jonas.hey(); results in an error as the function is not available on the prototype but on the constructor
 
 //To create a static method
@@ -292,6 +299,7 @@ const mishal = new PersonCl3('Mishal', 1993);
 /**
  * LECTURE: object.create
  */
+
 //Easier way rather than constructor fn
 const PersonProto = {
   calcAge() {
